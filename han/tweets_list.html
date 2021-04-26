@@ -1,0 +1,10 @@
+{% extends 'portal/index.html' %}
+{% block content %}
+  <h2>Resultado da busca no Twitter</h2>
+  <h3>Tweets</h2>
+  {% for tweet in tweets %}
+  <div style="margin-bottom: 20px;">
+    {{ tweet }}
+  </div>
+  {% endfor %}
+{% endblock %}

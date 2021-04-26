@@ -1,0 +1,43 @@
+{% extends 'portal/index.html' %}
+{% block content %}
+  <h2>Criar Infográficos</h2>
+  <p>
+    Ferramenta desenvolvida com o intuito de proporcionar uma forma de se criar infográficos
+    de forma simples e rápida. Para utilizar esta ferramenta, é necessário informar o nome dos
+    atributos, os dados e o tipo de gráfico que será criado.
+  </p>
+  <form method="POST" novalidate>
+    {% csrf_token %}
+    <div class="form-group">
+      <p>
+        Instruções:<br>1 - Em todas as linhas os dados devem ser separados por vírgula (sem espaço)<br>
+        2 - Na primeira linha devem ser inseridos os nomes das colunas<br>
+        3 - Nas demais linhas devem ser inseridos os dados que estão contidos nas colunas<br>
+        4 - Todas as linhas devem possuir o mesmo número de elementos<br>
+        5 - Todas as colunas devem possuir o mesmo número de elementos<br><br>
+        Exemplo:<br>
+        água,eletricidade,gasolina,aluguel<br>
+        100,201,184,700<br>
+        95,198,200,700<br>
+        191,200,190,750<br>
+        Os dados 100, 95 e 191 estão contidos na coluna água, 201, 198 e 200 na coluna eletricidade e assim por diante.
+      </p>
+      <textarea
+        placeholder="coluna1,coluna2"
+        class="form-control"
+        name="dataAttributes"
+        id="dataAttributes"
+        rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="typeGraphic">Escolha o tipo do gráfico a ser gerado: </label>
+      <select name="graphic" id="graphic">
+        <option value="bar">Barra</option>
+        <option value="area">Área</option>
+        <option value="pie">Pizza</option>
+        <option value="line">Linha</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Criar Gráfico</button>
+  </form>
+{% endblock %}
