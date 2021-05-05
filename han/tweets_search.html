@@ -4,7 +4,9 @@
   <p>
     Ferramenta desenvolvida com o intuito de proporcionar um mecanismo de raspagem de dados
     para que sejam feitos estudos posteriores sobre os resultados. Com esta ferramenta, é possível
-    buscar tweets por palavras-chave e, se desejado, tweets de usuários específicos.
+    buscar tweets por palavras-chave e, se desejado, tweets de usuários específicos. Além disso,
+    é possível escolher se devem ser retornados tweets que tenham todas as palavras-chave listadas
+    ou no mínimo uma.
   </p>
   <form method="POST" novalidate>
     {% csrf_token %}
@@ -37,6 +39,21 @@
       <small id="emailHelp" class="form-text text-muted">*deixar em branco para não restringir usuário</small>
     </div>
     <div class="form-group">
+      <label for="typeSearch">O tweet deve conter: </label>
+      <select name="search" id="search">
+        <option value="all-kw">todas as palavras-chave</option>
+        <option value="one-kw">no mínimo uma palavras-chave</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="numSearch">Número máximo de tweets retornados: </label>
+      <select name="num" id="num">
+        <option value="200">200</option>
+        <option value="100">100</option>
+        <option value="50">50</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="exampleFormControlTextarea1">Palavras-chave (Separadas por vírgula)</label>
       <textarea
         placeholder="palavra1,palavra2,palavra3,palavra4"
@@ -46,18 +63,6 @@
         rows="3"></textarea>
       <small id="palavraHelp" class="form-text text-muted">* tweets com qualquer uma dessas palavras serão retornados</small>
     </div>
-    
-    
-<!--    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Grupos de palavras-chave (Palavras separadas por vírgula e grupos separados por &)</label>
-      <textarea
-        placeholder='palavra1_grupo1,palavra2_grupo1&palavra1_grupo2,palavra2_grupo2'
-        class="form-control"
-        name='group'
-        id="exampleFormControlTextarea1"
-        rows="3"></textarea>
-      <small id="groupHelp" class="form-text text-muted">* tweets só serão retornados se contiverem todas palavras do grupo</small>
-    </div> -->
     <button type="submit" class="btn btn-primary">Buscar</button>
   </form>
 {% endblock %}
