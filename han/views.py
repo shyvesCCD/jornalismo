@@ -68,11 +68,17 @@ def tweets_search(request):
     search = search+ f' since:{begin_date}' + f' until:{end_date}'
 
     tweets = []
+    datas = []
     # Realiza a busca definida anteriormente, se limitando com o número máximo de tweets
     for i, tweet in enumerate(sntwitter.TwitterSearchScraper(search).get_items()):
-      if i > int(num_search):
+      if num_search != 'ilimitado' and i > int(num_search):
         break
-      tweets.append(tweet.content)
+      
+      # Recebe e formata a data do tweet
+      data = str(tweet.date).split()[0]
+      data = data.split('-')
+      data = f'{data[2]}-{data[1]}-{data[0]}'
+      tweets.append([data, tweet.content])
 
     return render(request, 'portal/tweets_list.html', {'tweets': tweets})
   else:
